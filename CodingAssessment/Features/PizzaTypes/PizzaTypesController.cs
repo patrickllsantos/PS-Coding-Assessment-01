@@ -1,4 +1,5 @@
-﻿using CodingAssessment.Features.PizzaTypes.Import;
+﻿using CodingAssessment.Features.PizzaTypes.GetAll;
+using CodingAssessment.Features.PizzaTypes.Import;
 using CodingAssessment.Models.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,19 @@ public class PizzaTypesController : ControllerBase
     {
         _mediator = mediator;
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] PaginationParams paginationParams, CancellationToken cancellationToken)
+    {
+        var query = new GetAllQuery(new GetAllRequest(paginationParams));
+        var result = await _mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
     
     [HttpPost("import")]
     public async Task<IActionResult> Import(ImportRequest request, CancellationToken cancellationToken)
     {
         await _mediator.Send(new ImportCommand(request), cancellationToken);
-        return Ok();
+        return NoContent();
     }
 }
