@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using CodingAssessment.Database;
-using CodingAssessment.Exceptions;
 using CodingAssessment.Mapping.CsvMapping;
 using CodingAssessment.Models;
 using CodingAssessment.Utilities;
@@ -17,31 +16,15 @@ namespace CodingAssessment.Features.PizzaTypes.ImportPizzaTypes;
 /// </summary>
 public static class ImportPizzaTypesCommandHandler
 {
-    /// <summary>
-    /// Handler for processing the <see cref="ImportPizzaTypesCommand"/>.
-    /// </summary>
     internal sealed class Handler : IRequestHandler<ImportPizzaTypesCommand, Unit>
     {
         private readonly DatabaseContext _context;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Handler"/> class.
-        /// </summary>
-        /// <param name="context">The database context.</param>
         public Handler(DatabaseContext context)
         {
             _context = context;
         }
 
-        /// <summary>
-        /// Handles the import command.
-        /// </summary>
-        /// <param name="request">The command containing the import request.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A task that represents the asynchronous operation.</returns>
-        /// <exception cref="ValidationException">Thrown when validation fails.</exception>
-        /// <exception cref="DuplicateKeyException">Thrown when a duplicate key error occurs.</exception>
-        /// <exception cref="CsvProcessingException">Thrown when an error occurs during CSV processing.</exception>
         public async Task<Unit> Handle(ImportPizzaTypesCommand request, CancellationToken cancellationToken)
         {
             var validation = await new ImportPizzaTypesValidation()
@@ -72,31 +55,18 @@ public static class ImportPizzaTypesCommandHandler
 
                 csv.Context.RegisterClassMap(new PizzaTypeMap(categories));
 
-                var pizzaTypes = csv.GetRecords<PizzaType>().ToList();
+                var pizzaTypes = csv.GetRecords<PizzaType>()
+                    .Where(pt => pt.CategoryId != -1)
+                    .ToList();
 
-                if (pizzaTypes.Count is not 0)
-                {
-                    try
-                    {
-                        _context.PizzaTypes.AddRange(pizzaTypes);
-                        await _context.SaveChangesAsync(cancellationToken);
-                    }
-                    catch (DbUpdateException ex) when (DatabaseExceptionHelper.IsDuplicateKeyException(ex))
-                    {
-                        throw new DuplicateKeyException(ErrorMessages.DuplicatePizzaTypeError, ex);
-                    }
-                }
+                _context.PizzaTypes.AddRange(pizzaTypes);
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }
-            catch (ReaderException ex)
+            catch (Exception ex)
             {
-                if (ex.InnerException is CategoryNotFoundException categoryNotFoundException)
-                {
-                    throw new CsvProcessingException(categoryNotFoundException.Message, categoryNotFoundException);
-                }
-                
-                throw new CsvProcessingException(ErrorMessages.CsvProcessingError, ex);
+                throw new Exception(ErrorMessages.CsvProcessingError);
             }        
         }        
     }
