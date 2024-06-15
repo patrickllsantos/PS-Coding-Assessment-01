@@ -8,9 +8,6 @@ namespace CodingAssessment.Features.Pizzas.ImportPizzas;
 /// </summary>
 public class ImportPizzasFileValidation : AbstractValidator<ImportPizzasRequest>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ImportPizzasFileValidation"/> class.
-    /// </summary>
     public ImportPizzasFileValidation()
     {
         RuleFor(x => x.File)

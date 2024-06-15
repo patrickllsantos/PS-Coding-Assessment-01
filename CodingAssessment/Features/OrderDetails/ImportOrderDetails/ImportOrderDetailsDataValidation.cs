@@ -2,6 +2,9 @@
 
 namespace CodingAssessment.Features.OrderDetails.ImportOrderDetails;
 
+/// <summary>
+/// Validator for the individual items in the csv.
+/// </summary>
 public class ImportOrderDetailsDataValidation : AbstractValidator<Models.OrderDetails>
 {
     public ImportOrderDetailsDataValidation()

@@ -3,6 +3,9 @@ using FluentValidation;
 
 namespace CodingAssessment.Features.Pizzas.ImportPizzas;
 
+/// <summary>
+/// Validator for individual data in the csv file.
+/// </summary>
 public class ImportPizzasDataValidation : AbstractValidator<Pizza>
 {
     public ImportPizzasDataValidation()

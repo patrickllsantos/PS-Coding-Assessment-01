@@ -5,6 +5,9 @@ using CsvHelper.Configuration;
 
 namespace CodingAssessment.Mapping;
 
+/// <summary>
+/// Defines the mapping of CSV columns to the properties of the <see cref="Pizza"/> class.
+/// </summary>
 public sealed class PizzaMap : ClassMap<Pizza>
 {
     public PizzaMap(List<string> pizzaTypes)

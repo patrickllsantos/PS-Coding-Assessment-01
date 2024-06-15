@@ -8,9 +8,6 @@ namespace CodingAssessment.Features.Orders.ImportOrders;
 /// </summary>
 public class ImportOrdersFileValidation : AbstractValidator<ImportOrdersRequest>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ImportOrdersFileValidation"/> class.
-    /// </summary>
     public ImportOrdersFileValidation()
     {
         RuleFor(x => x.File)
