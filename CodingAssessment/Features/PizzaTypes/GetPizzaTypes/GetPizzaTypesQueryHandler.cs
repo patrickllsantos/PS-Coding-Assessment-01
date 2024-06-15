@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingAssessment.Features.PizzaTypes.GetAll;
 
-public static class GetAllQueryHandler
+public static class GetPizzaTypesQueryHandler
 {
 
-    internal sealed class Handler : IRequestHandler<GetAllQuery, GetAllResponse>
+    internal sealed class Handler : IRequestHandler<GetPizzaTypesQuery, GetPizzaTypesResponse>
     {
         private readonly DatabaseContext _context;
 
@@ -17,7 +17,7 @@ public static class GetAllQueryHandler
             _context = context;
         }
         
-        public async Task<GetAllResponse> Handle(GetAllQuery request, CancellationToken cancellationToken)
+        public async Task<GetPizzaTypesResponse> Handle(GetPizzaTypesQuery request, CancellationToken cancellationToken)
         {
             var req = request.Request;
             var skip = req.PaginationParams.PageSize * (req.PaginationParams.PageNumber - 1);
@@ -25,7 +25,7 @@ public static class GetAllQueryHandler
 
             var pizzaTypes = await _context.PizzaTypes
                 .AsNoTracking()
-                .Select(x => new PizzaTypeDto
+                .Select(x => new PizzaTypeResponse
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -41,7 +41,7 @@ public static class GetAllQueryHandler
             var paginationMetadata = new Pagination(req.PaginationParams.PageNumber, totalPages,
                 req.PaginationParams.PageSize, totalCount);
 
-            var response = new GetAllResponse(pizzaTypes, paginationMetadata);
+            var response = new GetPizzaTypesResponse(pizzaTypes, paginationMetadata);
 
             return response;
         }

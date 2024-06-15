@@ -4,4 +4,4 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CodingAssessment.Features.PizzaTypes.GetAll;
 
-public record GetAllRequest([FromQuery] PaginationParams PaginationParams) : IRequest<GetAllResponse>;
+public record GetPizzaTypesRequest([FromQuery] PaginationParams PaginationParams) : IRequest<GetPizzaTypesResponse>;

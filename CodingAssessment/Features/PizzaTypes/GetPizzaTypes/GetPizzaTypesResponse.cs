@@ -2,7 +2,7 @@
 
 namespace CodingAssessment.Features.PizzaTypes.GetAll;
 
-public record GetAllResponse(
-    List<PizzaTypeDto> PizzaTypes, 
+public record GetPizzaTypesResponse(
+    List<PizzaTypeResponse> PizzaTypes, 
     Pagination Pagination
 );
