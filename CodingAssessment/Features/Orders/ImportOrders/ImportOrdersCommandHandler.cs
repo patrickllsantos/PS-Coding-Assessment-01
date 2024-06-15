@@ -7,7 +7,6 @@ using CodingAssessment.Utilities;
 using CsvHelper;
 using CsvHelper.Configuration;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using ValidationException = CodingAssessment.Exceptions.ValidationException;
 
 namespace CodingAssessment.Features.Orders.ImportOrders;
@@ -51,19 +50,12 @@ public static class ImportOrdersCommandHandler
                 csv.Context.RegisterClassMap(new OrderMap());
                 var orders = csv.GetRecords<Order>().ToList();
 
-                try
-                {
-                    _context.Orders.AddRange(orders);
-                    var result = await _context.SaveChangesAsync(cancellationToken);
-                }
-                catch (DbUpdateException ex) when (DatabaseExceptionHelper.IsDuplicateKeyException(ex))
-                {
-                    throw new DuplicateKeyException(ErrorMessages.DuplicateOrderError, ex);
-                }
+                _context.Orders.AddRange(orders);
+                 await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }
-            catch (ReaderException ex)
+            catch (Exception ex)
             {
                 throw new CsvProcessingException (ErrorMessages.CsvProcessingError, ex);
             }        

@@ -93,7 +93,6 @@ public sealed class ImportOrderDetailsCommandHandler
 
         private async Task ProcessBatchAsync(List<Models.OrderDetails> batch, CancellationToken cancellationToken)
         {
-            // contains list of order ids
             var orderIds = batch.Select(od => od.OrderId).Distinct().ToList();
 
             var existingOrderIds = await _context.Orders
