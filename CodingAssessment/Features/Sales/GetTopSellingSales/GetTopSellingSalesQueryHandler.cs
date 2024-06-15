@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingAssessment.Features.Sales.GetTopSellingSales;
 
+/// <summary>
+/// Handler for the <see cref="GetTopSellingSalesQuery"/>.
+/// </summary>
 public static class GetTopSellingSalesQueryHandler
 {
     internal sealed class Handler : IRequestHandler<GetTopSellingSalesQuery, GetTopSellingSalesResponse>

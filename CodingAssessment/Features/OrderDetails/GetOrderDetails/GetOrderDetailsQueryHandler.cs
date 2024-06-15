@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingAssessment.Features.OrderDetails.GetOrderDetails;
 
+/// <summary>
+/// Handler for the <see cref="GetOrderDetailsQuery"/>.
+/// </summary>
 public static class GetOrderDetailsQueryHandler
 {
     internal sealed class Handler : IRequestHandler<GetOrderDetailsQuery, GetOrderDetailsResponse>

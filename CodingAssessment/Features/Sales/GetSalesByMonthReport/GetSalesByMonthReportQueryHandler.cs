@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingAssessment.Features.Sales.GetSalesByMonthReport;
 
+/// <summary>
+/// Handler for the <see cref="GetSalesByMonthReportQuery"/>.
+/// </summary>
 public static class GetSalesByMonthReportQueryHandler
 {
     internal sealed class Handler : IRequestHandler<GetSalesByMonthReportQuery, GetSalesByMonthReportResponse>

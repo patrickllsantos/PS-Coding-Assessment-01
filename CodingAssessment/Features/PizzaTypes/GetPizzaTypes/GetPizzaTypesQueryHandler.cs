@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingAssessment.Features.PizzaTypes.GetPizzaTypes;
 
+/// <summary>
+/// Handler for the <see cref="GetPizzaTypesQuery"/>.
+/// </summary>
 public static class GetPizzaTypesQueryHandler
 {
 

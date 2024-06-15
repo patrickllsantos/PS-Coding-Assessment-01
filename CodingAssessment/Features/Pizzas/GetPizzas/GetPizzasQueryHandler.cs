@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingAssessment.Features.Pizzas.GetPizzas;
 
+/// <summary>
+/// Handler for the <see cref="GetPizzasQuery"/>.
+/// </summary>
 public static class GetPizzasQueryHandler
 {
     internal sealed class Handler : IRequestHandler<GetPizzasQuery, GetPizzasResponse>

@@ -3,6 +3,9 @@ using CsvHelper.Configuration;
 
 namespace CodingAssessment.Mapping;
 
+/// <summary>
+/// Defines the mapping of CSV columns to the properties of the <see cref="OrderDetails"/> class.
+/// </summary>
 public sealed class OrderDetailsMap : ClassMap<OrderDetails>
 {
     public OrderDetailsMap(HashSet<string> pizzaIds)

@@ -1,5 +1,8 @@
 ﻿namespace CodingAssessment.Features.Sales.GetTopSellingSales;
 
+/// <summary>
+/// Represents the response containing the top-selling pizzas.
+/// </summary>
 public record GetTopSellingSalesResponse(
     List<TopSeller> TopSellers
 );
