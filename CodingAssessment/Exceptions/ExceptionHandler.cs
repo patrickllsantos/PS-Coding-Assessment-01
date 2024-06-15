@@ -64,11 +64,6 @@ public class ExceptionHandler : IExceptionHandler
                 problemDetails.Status = StatusCodes.Status400BadRequest;
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 break;
-            case DuplicateKeyException:
-                problemDetails.Title = "Duplicate key error.";
-                problemDetails.Status = StatusCodes.Status409Conflict;
-                httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
-                break;
             case CsvProcessingException:
                 problemDetails.Title = "An error occurred while importing the data";
                 problemDetails.Detail = exception.Message;

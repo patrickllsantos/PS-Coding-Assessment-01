@@ -1,10 +1,9 @@
 ﻿using CodingAssessment.Exceptions;
 using CodingAssessment.Models;
 using CodingAssessment.Models.Enums;
-using CsvHelper;
 using CsvHelper.Configuration;
 
-namespace CodingAssessment.Mapping.CsvMapping;
+namespace CodingAssessment.Mapping;
 
 public sealed class PizzaMap : ClassMap<Pizza>
 {

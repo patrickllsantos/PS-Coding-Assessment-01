@@ -1,7 +1,7 @@
 ﻿using CodingAssessment.Models;
 using CsvHelper.Configuration;
 
-namespace CodingAssessment.Mapping.CsvMapping;
+namespace CodingAssessment.Mapping;
 
 public sealed class OrderDetailsMap : ClassMap<OrderDetails>
 {

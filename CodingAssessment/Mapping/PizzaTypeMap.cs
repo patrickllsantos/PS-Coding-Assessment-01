@@ -1,8 +1,7 @@
-﻿using CodingAssessment.Exceptions;
-using CodingAssessment.Models;
+﻿using CodingAssessment.Models;
 using CsvHelper.Configuration;
 
-namespace CodingAssessment.Mapping.CsvMapping;
+namespace CodingAssessment.Mapping;
 
 /// <summary>
 /// Defines the mapping of CSV columns to the properties of the <see cref="PizzaType"/> class.

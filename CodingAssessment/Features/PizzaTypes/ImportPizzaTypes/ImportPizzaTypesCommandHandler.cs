@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using CodingAssessment.Database;
-using CodingAssessment.Mapping.CsvMapping;
+using CodingAssessment.Mapping;
 using CodingAssessment.Models;
 using CodingAssessment.Utilities;
 using CsvHelper;
