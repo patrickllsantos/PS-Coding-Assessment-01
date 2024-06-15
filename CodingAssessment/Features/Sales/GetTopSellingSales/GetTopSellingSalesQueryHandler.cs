@@ -1,0 +1,38 @@
+﻿using CodingAssessment.Database;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace CodingAssessment.Features.Sales.GetTopSellingSales;
+
+public static class GetTopSellingSalesQueryHandler
+{
+    internal sealed class Handler : IRequestHandler<GetTopSellingSalesQuery, GetTopSellingSalesResponse>
+    {
+        private readonly DatabaseContext _context;
+
+        public Handler(DatabaseContext context)
+        {
+            _context = context;
+        }
+        
+        public async Task<GetTopSellingSalesResponse> Handle(GetTopSellingSalesQuery request, CancellationToken cancellationToken)
+        {
+            var topSellers = await _context.OrderDetails
+                .Include(x => x.Pizza)
+                .ThenInclude(x => x.PizzaType)
+                .GroupBy(x => x.Pizza.PizzaType.Name)
+                .Select(x => new TopSeller
+                {
+                    Name = x.Key,
+                    TotalQuantitySold = x.Sum(od => od.Quantity)
+                })
+                .OrderByDescending(x => x.TotalQuantitySold)
+                .Take(request.topCount > 100 ? 100 : request.topCount)
+                .ToListAsync(cancellationToken);
+
+            var response = new GetTopSellingSalesResponse(topSellers);
+            
+            return response;
+        }
+    }
+}
