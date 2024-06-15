@@ -11,6 +11,11 @@ public static class ErrorMessages
     public static readonly string DuplicatePizzaTypeError = "Duplicate pizza types found in the CSV file.";
 
     /// <summary>
+    /// Error message for duplicate order.
+    /// </summary>
+    public static readonly string DuplicateOrderError = "Duplicate order found in the CSV file.";
+    
+    /// <summary>
     /// Error message for CSV processing errors.
     /// </summary>
     public static readonly string CsvProcessingError = "An error occurred while processing the CSV file.";
