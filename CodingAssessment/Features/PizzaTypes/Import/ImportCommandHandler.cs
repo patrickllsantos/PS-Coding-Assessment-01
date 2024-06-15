@@ -6,46 +6,52 @@ using CodingAssessment.Models;
 using CodingAssessment.Utilities;
 using CsvHelper;
 using CsvHelper.Configuration;
-using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ValidationException = CodingAssessment.Exceptions.ValidationException;
 
-namespace CodingAssessment.Features.PizzaTypes;
+namespace CodingAssessment.Features.PizzaTypes.Import;
 
-public static class ImportPizzaTypes
+/// <summary>
+/// Contains the handler for processing the import command.
+/// </summary>
+public static class ImportCommandHandler
 {
-    public record Command(Request Request) : IRequest<Unit>;
-    public record Request(IFormFile File);
-
-    public class Validation : AbstractValidator<Request>
-    {
-        public Validation()
-        {
-            RuleFor(x => x.File)
-                .NotNull().WithMessage("File is required.");
-            
-            RuleFor(x => x.File)
-                .Must(ValidationHelpers.BeAValidCsv).WithMessage("Only CSV files are allowed.");
-        }
-    }
-    
-    internal sealed class Handler : IRequestHandler<Command, Unit>
+    /// <summary>
+    /// Handler for processing the <see cref="ImportCommand"/>.
+    /// </summary>
+    internal sealed class Handler : IRequestHandler<ImportCommand, Unit>
     {
         private readonly DatabaseContext _context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Handler"/> class.
+        /// </summary>
+        /// <param name="context">The database context.</param>
         public Handler(DatabaseContext context)
         {
             _context = context;
         }
-        
-        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+
+        /// <summary>
+        /// Handles the import command.
+        /// </summary>
+        /// <param name="request">The command containing the import request.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ValidationException">Thrown when validation fails.</exception>
+        /// <exception cref="DuplicateKeyException">Thrown when a duplicate key error occurs.</exception>
+        /// <exception cref="CsvProcessingException">Thrown when an error occurs during CSV processing.</exception>
+        public async Task<Unit> Handle(ImportCommand request, CancellationToken cancellationToken)
         {
-            var validation = await new Validation().ValidateAsync(request.Request, cancellationToken);
+            var validation = await new ImportValidation()
+                .ValidateAsync(request.Request, cancellationToken);
 
             if (!validation.IsValid)
             {
-                var errorMessages = validation.Errors.Select(e => e.ErrorMessage);
+                var errorMessages = validation.Errors
+                    .Select(e => e.ErrorMessage);
+                
                 throw new ValidationException(errorMessages);
             }
 
@@ -67,7 +73,7 @@ public static class ImportPizzaTypes
                 csv.Context.RegisterClassMap(new PizzaTypeMap(categories));
 
                 var pizzaTypes = csv.GetRecords<PizzaType>().ToList();
-                
+
                 if (pizzaTypes.Count is not 0)
                 {
                     try
