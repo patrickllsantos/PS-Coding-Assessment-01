@@ -21,7 +21,7 @@ public class PizzasController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] PaginationParams paginationParams,
         CancellationToken cancellationToken)
     {
-        var query = new GetAllQuery(new GetAllRequest(paginationParams));
+        var query = new GetPizzasQuery(new GetPizzasRequest(paginationParams));
         var result = await _mediator.Send(query, cancellationToken);
         return Ok(result);
     }

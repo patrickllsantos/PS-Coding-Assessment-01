@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingAssessment.Features.Pizzas.GetAll;
 
-public static class GetAllQueryHandler
+public static class GetPizzasQueryHandler
 {
-    internal sealed class Handler : IRequestHandler<GetAllQuery, GetAllResponse>
+    internal sealed class Handler : IRequestHandler<GetPizzasQuery, GetPizzasResponse>
     {
         private readonly DatabaseContext _context;
 
@@ -16,7 +16,7 @@ public static class GetAllQueryHandler
             _context = context;
         }
         
-        public async Task<GetAllResponse> Handle(GetAllQuery request, CancellationToken cancellationToken)
+        public async Task<GetPizzasResponse> Handle(GetPizzasQuery request, CancellationToken cancellationToken)
         {
             var req = request.Request;
             var skip = req.PaginationParams.PageSize * (req.PaginationParams.PageNumber - 1);
@@ -39,7 +39,7 @@ public static class GetAllQueryHandler
             var paginationMetadata = new Pagination(req.PaginationParams.PageNumber, totalPages,
                 req.PaginationParams.PageSize, totalCount);
 
-            var response = new GetAllResponse(pizzas, paginationMetadata);
+            var response = new GetPizzasResponse(pizzas, paginationMetadata);
 
             return response;
         }
