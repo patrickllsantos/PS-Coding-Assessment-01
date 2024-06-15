@@ -8,7 +8,7 @@ namespace CodingAssessment.Models;
 public class Pizza
 {
     /// <summary>
-    /// Gets or sets the id
+    /// Gets or sets the id.
     /// </summary>
     public required string Id { get; set; }
 
@@ -26,12 +26,17 @@ public class Pizza
     public required string PizzaTypeId { get; set; }
 
     /// <summary>
-    /// Gets or sets the size of the pizza
+    /// Gets or sets the size of the pizza.
     /// </summary>
     public required Size Size { get; set; }
 
     /// <summary>
-    /// Gets or sets the price of the pizza
+    /// Gets or sets the price of the pizza.
     /// </summary>
     public required decimal Price { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the collection of order details for this pizza.
+    /// </summary>
+    public ICollection<OrderDetails> OrderDetails { get; set; } = new List<OrderDetails>();
 }

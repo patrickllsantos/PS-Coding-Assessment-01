@@ -1,17 +1,17 @@
 ﻿namespace CodingAssessment.Models;
 
 /// <summary>
-/// Represents the pizza type
+/// Represents the pizza type.
 /// </summary>
 public class PizzaType
 {
     /// <summary>
-    /// Gets or sets the unique identifier for the order
+    /// Gets or sets the unique identifier for the order.
     /// </summary>
     public required string Id { get; set; }
 
     /// <summary>
-    /// Gets or sets the name of the pizza
+    /// Gets or sets the name of the pizza.
     /// </summary>
     public required string Name { get; set; }
 
@@ -24,12 +24,20 @@ public class PizzaType
     public PizzaCategory Category { get; }
 
     /// <summary>
-    /// Gets or sets the category id
+    /// Gets or sets the category id.
     /// </summary>
     public required int CategoryId { get; set; }
 
     /// <summary>
-    /// Gets or sets the ingredients
+    /// Gets or sets the ingredients.
     /// </summary>
     public required string Ingredients { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the collection of pizzas of this type.
+    /// </summary>
+    /// <remarks>
+    /// Navigation property for the pizzas.
+    /// </remarks>
+    public ICollection<Pizza> Pizzas { get; set; } = new List<Pizza>();
 }

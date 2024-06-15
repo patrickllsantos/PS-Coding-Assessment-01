@@ -6,7 +6,7 @@
 public class OrderDetails
 {
     /// <summary>
-    /// Gets or sets the unique identifier for the order details
+    /// Gets or sets the unique identifier for the order details.
     /// </summary>
     public int Id { get; set; }
 
@@ -32,12 +32,12 @@ public class OrderDetails
     public Pizza Pizza { get; set; }
 
     /// <summary>
-    /// Gets or sets the pizza id
+    /// Gets or sets the pizza id.
     /// </summary>
     public required string PizzaId { get; set; }
 
     /// <summary>
-    /// Gets or sets the quantity
+    /// Gets or sets the quantity.
     /// </summary>
     public required int Quantity { get; set; }
 }
