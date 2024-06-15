@@ -23,7 +23,7 @@ public static class GetPizzasQueryHandler
             var take = req.PaginationParams.PageSize;
 
             var pizzas = await _context.Pizzas
-                .Select(x => new PizzaDto
+                .Select(x => new PizzaResponse
                 {
                     Id = x.Id,
                     PizzaType = x.PizzaType.Name,

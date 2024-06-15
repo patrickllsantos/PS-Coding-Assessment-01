@@ -4,14 +4,14 @@ using FluentValidation;
 namespace CodingAssessment.Features.PizzaTypes.Import;
 
 /// <summary>
-/// Validator for the <see cref="ImportRequest"/> class.
+/// Validator for the <see cref="ImportPizzaTypesRequest"/> class.
 /// </summary>
-public class ImportValidation : AbstractValidator<ImportRequest>
+public class ImportPizzaTypesValidation : AbstractValidator<ImportPizzaTypesRequest>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ImportValidation"/> class.
+    /// Initializes a new instance of the <see cref="ImportPizzaTypesValidation"/> class.
     /// </summary>
-    public ImportValidation()
+    public ImportPizzaTypesValidation()
     {
         RuleFor(x => x.File)
             .NotNull()

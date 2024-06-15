@@ -26,9 +26,9 @@ public class PizzaTypesController : ControllerBase
     }
     
     [HttpPost("import")]
-    public async Task<IActionResult> Import(ImportRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Import(ImportPizzaTypesRequest pizzaTypesRequest, CancellationToken cancellationToken)
     {
-        await _mediator.Send(new ImportCommand(request), cancellationToken);
+        await _mediator.Send(new ImportPizzaTypesCommand(pizzaTypesRequest), cancellationToken);
         return NoContent();
     }
 }

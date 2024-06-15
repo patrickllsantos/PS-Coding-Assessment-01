@@ -15,12 +15,12 @@ namespace CodingAssessment.Features.PizzaTypes.Import;
 /// <summary>
 /// Contains the handler for processing the import command.
 /// </summary>
-public static class ImportCommandHandler
+public static class ImportPizzaTypesCommandHandler
 {
     /// <summary>
-    /// Handler for processing the <see cref="ImportCommand"/>.
+    /// Handler for processing the <see cref="ImportPizzaTypesCommand"/>.
     /// </summary>
-    internal sealed class Handler : IRequestHandler<ImportCommand, Unit>
+    internal sealed class Handler : IRequestHandler<ImportPizzaTypesCommand, Unit>
     {
         private readonly DatabaseContext _context;
 
@@ -42,10 +42,10 @@ public static class ImportCommandHandler
         /// <exception cref="ValidationException">Thrown when validation fails.</exception>
         /// <exception cref="DuplicateKeyException">Thrown when a duplicate key error occurs.</exception>
         /// <exception cref="CsvProcessingException">Thrown when an error occurs during CSV processing.</exception>
-        public async Task<Unit> Handle(ImportCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ImportPizzaTypesCommand request, CancellationToken cancellationToken)
         {
-            var validation = await new ImportValidation()
-                .ValidateAsync(request.Request, cancellationToken);
+            var validation = await new ImportPizzaTypesValidation()
+                .ValidateAsync(request.PizzaTypesRequest, cancellationToken);
 
             if (!validation.IsValid)
             {
@@ -57,7 +57,7 @@ public static class ImportCommandHandler
 
             try
             {
-                using var reader = new StreamReader(request.Request.File.OpenReadStream());
+                using var reader = new StreamReader(request.PizzaTypesRequest.File.OpenReadStream());
                 using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     HeaderValidated = null,

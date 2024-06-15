@@ -3,6 +3,6 @@
 namespace CodingAssessment.Features.Pizzas.GetAll;
 
 public record GetPizzasResponse(
-    List<PizzaDto> Pizzas, 
+    List<PizzaResponse> Pizzas, 
     Pagination Pagination
 );
