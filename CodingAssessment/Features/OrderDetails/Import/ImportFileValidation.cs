@@ -1,7 +1,7 @@
 ﻿using CodingAssessment.Utilities;
 using FluentValidation;
 
-namespace CodingAssessment.Features.Shared.Import;
+namespace CodingAssessment.Features.OrderDetails.Import;
 
 /// <summary>
 /// Validator for the <see cref="ImportRequest"/> class.
