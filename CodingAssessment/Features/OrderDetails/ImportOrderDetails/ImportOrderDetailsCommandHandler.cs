@@ -14,9 +14,9 @@ namespace CodingAssessment.Features.OrderDetails.Import;
 /// <summary>
 /// Contains the handler for processing the import command.
 /// </summary>
-public sealed class ImportCommandHandler
+public sealed class ImportOrderDetailsCommandHandler
 {
-    internal sealed class Handler : IRequestHandler<ImportCommand, Unit>
+    internal sealed class Handler : IRequestHandler<ImportOrderDetailsCommand, Unit>
     {
         private readonly DatabaseContext _context;
 
@@ -25,10 +25,10 @@ public sealed class ImportCommandHandler
             _context = context;
         }
 
-        public async Task<Unit> Handle(ImportCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ImportOrderDetailsCommand request, CancellationToken cancellationToken)
         {
-            var fileValidation = await new ImportFileValidation()
-                .ValidateAsync(request.Request, cancellationToken);
+            var fileValidation = await new ImportOrderDetailsFileValidation()
+                .ValidateAsync(request.OrderDetailsRequest, cancellationToken);
 
             if (!fileValidation.IsValid)
             {
@@ -40,7 +40,7 @@ public sealed class ImportCommandHandler
 
             try
             {
-                using var reader = new StreamReader(request.Request.File.OpenReadStream());
+                using var reader = new StreamReader(request.OrderDetailsRequest.File.OpenReadStream());
                 using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     HeaderValidated = null,
@@ -61,7 +61,7 @@ public sealed class ImportCommandHandler
                 var batch = new List<Models.OrderDetails>();
                 await foreach (var record in orderDetails)
                 {
-                    var dataValidation = await new ImportDataValidation()
+                    var dataValidation = await new ImportOrderDetailsDataValidation()
                         .ValidateAsync(record, cancellationToken);
 
                     if (!dataValidation.IsValid)

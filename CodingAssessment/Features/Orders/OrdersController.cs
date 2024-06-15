@@ -27,9 +27,9 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost("import")]
-    public async Task<IActionResult> Import(ImportRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Import(ImportOrdersRequest ordersRequest, CancellationToken cancellationToken)
     {
-        await _mediator.Send(new ImportCommand(request), cancellationToken);
+        await _mediator.Send(new ImportOrdersCommand(ordersRequest), cancellationToken);
         return NoContent();
     }
 }

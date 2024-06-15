@@ -23,7 +23,7 @@ public static class GetAllQueryHandler
             var take = req.PaginationParams.PageSize;
 
             var orders = await _context.Orders
-                .Select(x => new OrderDto
+                .Select(x => new OrderResponse
                 {
                     Id = x.Id,
                     Date = x.Date,

@@ -1,6 +1,6 @@
 ﻿namespace CodingAssessment.Features.Orders;
 
-public class OrderDto
+public class OrderResponse
 {
     public int Id { get; set; }
 
