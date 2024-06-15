@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using CodingAssessment.Models.Enums;
 
 namespace CodingAssessment.Models;
 
