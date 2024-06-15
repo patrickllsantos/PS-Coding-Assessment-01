@@ -1,7 +1,6 @@
-﻿using CodingAssessment.Models;
-using CodingAssessment.Models.Pagination;
+﻿using CodingAssessment.Models.Pagination;
 
-namespace CodingAssessment.Features.Orders.GetAll;
+namespace CodingAssessment.Features.Orders.GetOrders;
 
 public record GetOrdersResponse(
     List<OrderResponse> Orders, 

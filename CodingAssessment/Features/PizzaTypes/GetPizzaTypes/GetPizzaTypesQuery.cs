@@ -1,6 +1,5 @@
-﻿using CodingAssessment.Models.Pagination;
-using MediatR;
+﻿using MediatR;
 
-namespace CodingAssessment.Features.PizzaTypes.GetAll;
+namespace CodingAssessment.Features.PizzaTypes.GetPizzaTypes;
 
 public record GetPizzaTypesQuery(GetPizzaTypesRequest Request) : IRequest<GetPizzaTypesResponse>;

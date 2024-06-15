@@ -10,7 +10,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ValidationException = CodingAssessment.Exceptions.ValidationException;
 
-namespace CodingAssessment.Features.Orders.Import;
+namespace CodingAssessment.Features.Orders.ImportOrders;
 
 /// <summary>
 /// Contains the handler for processing the import command.

@@ -1,5 +1,5 @@
-﻿using CodingAssessment.Features.PizzaTypes.GetAll;
-using CodingAssessment.Features.PizzaTypes.Import;
+﻿using CodingAssessment.Features.PizzaTypes.GetPizzaTypes;
+using CodingAssessment.Features.PizzaTypes.ImportPizzaTypes;
 using CodingAssessment.Models.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

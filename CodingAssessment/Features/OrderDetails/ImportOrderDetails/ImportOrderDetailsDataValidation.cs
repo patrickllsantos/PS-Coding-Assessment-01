@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CodingAssessment.Features.OrderDetails.Import;
+namespace CodingAssessment.Features.OrderDetails.ImportOrderDetails;
 
 public class ImportOrderDetailsDataValidation : AbstractValidator<Models.OrderDetails>
 {

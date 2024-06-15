@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CodingAssessment.Features.Pizzas.Import;
+namespace CodingAssessment.Features.Pizzas.ImportPizzas;
 
 /// <summary>
 /// Represents a command to import data from a CSV file.

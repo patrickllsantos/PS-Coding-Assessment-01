@@ -1,4 +1,4 @@
-﻿namespace CodingAssessment.Features.Pizzas.Import;
+﻿namespace CodingAssessment.Features.Pizzas.ImportPizzas;
 
 /// <summary>
 /// Represents a request to import data from a CSV file.

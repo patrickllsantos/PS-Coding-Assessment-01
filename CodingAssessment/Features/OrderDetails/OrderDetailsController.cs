@@ -1,5 +1,5 @@
-﻿using CodingAssessment.Features.OrderDetails.GetAll;
-using CodingAssessment.Features.OrderDetails.Import;
+﻿using CodingAssessment.Features.OrderDetails.GetOrderDetails;
+using CodingAssessment.Features.OrderDetails.ImportOrderDetails;
 using CodingAssessment.Models.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

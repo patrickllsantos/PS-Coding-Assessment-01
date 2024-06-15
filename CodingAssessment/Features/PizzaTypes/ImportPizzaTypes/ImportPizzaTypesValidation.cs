@@ -1,7 +1,7 @@
 ﻿using CodingAssessment.Utilities;
 using FluentValidation;
 
-namespace CodingAssessment.Features.PizzaTypes.Import;
+namespace CodingAssessment.Features.PizzaTypes.ImportPizzaTypes;
 
 /// <summary>
 /// Validator for the <see cref="ImportPizzaTypesRequest"/> class.

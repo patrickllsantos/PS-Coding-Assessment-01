@@ -3,7 +3,7 @@ using CodingAssessment.Models.Pagination;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodingAssessment.Features.PizzaTypes.GetAll;
+namespace CodingAssessment.Features.PizzaTypes.GetPizzaTypes;
 
 public static class GetPizzaTypesQueryHandler
 {

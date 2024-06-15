@@ -2,6 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CodingAssessment.Features.PizzaTypes.GetAll;
+namespace CodingAssessment.Features.PizzaTypes.GetPizzaTypes;
 
 public record GetPizzaTypesRequest([FromQuery] PaginationParams PaginationParams) : IRequest<GetPizzaTypesResponse>;

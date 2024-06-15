@@ -1,7 +1,7 @@
 ﻿using CodingAssessment.Models;
 using FluentValidation;
 
-namespace CodingAssessment.Features.Pizzas.Import;
+namespace CodingAssessment.Features.Pizzas.ImportPizzas;
 
 public class ImportPizzasDataValidation : AbstractValidator<Pizza>
 {

@@ -2,6 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CodingAssessment.Features.Orders.GetAll;
+namespace CodingAssessment.Features.Orders.GetOrders;
 
 public record GetOrdersRequest([FromQuery] PaginationParams PaginationParams) : IRequest<GetOrdersResponse>;

@@ -3,7 +3,7 @@ using CodingAssessment.Models.Pagination;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodingAssessment.Features.Orders.GetAll;
+namespace CodingAssessment.Features.Orders.GetOrders;
 
 public static class GetOrdersQueryHandler
 {

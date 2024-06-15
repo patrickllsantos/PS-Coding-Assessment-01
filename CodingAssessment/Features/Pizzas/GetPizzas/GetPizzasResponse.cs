@@ -1,6 +1,6 @@
 ﻿using CodingAssessment.Models.Pagination;
 
-namespace CodingAssessment.Features.Pizzas.GetAll;
+namespace CodingAssessment.Features.Pizzas.GetPizzas;
 
 public record GetPizzasResponse(
     List<PizzaResponse> Pizzas, 

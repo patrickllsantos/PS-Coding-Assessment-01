@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CodingAssessment.Features.Orders.Import;
+namespace CodingAssessment.Features.Orders.ImportOrders;
 
 /// <summary>
 /// Represents a command to import data from a CSV file.

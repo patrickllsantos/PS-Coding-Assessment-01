@@ -10,7 +10,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ValidationException = CodingAssessment.Exceptions.ValidationException;
 
-namespace CodingAssessment.Features.Pizzas.Import;
+namespace CodingAssessment.Features.Pizzas.ImportPizzas;
 
 /// <summary>
 /// Contains the handler for processing the import command.
