@@ -1,4 +1,4 @@
-﻿namespace CodingAssessment.Features.Shared.Import;
+﻿namespace CodingAssessment.Features.Orders.Import;
 
 /// <summary>
 /// Represents a request to import data from a CSV file.

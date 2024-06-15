@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using CodingAssessment.Database;
 using CodingAssessment.Exceptions;
-using CodingAssessment.Features.Shared.Import;
 using CodingAssessment.Mapping.CsvMapping;
 using CodingAssessment.Models;
 using CodingAssessment.Utilities;
@@ -55,7 +54,7 @@ public static class ImportCommandHandler
                 try
                 {
                     _context.Orders.AddRange(orders);
-                    await _context.SaveChangesAsync(cancellationToken);
+                    var result = await _context.SaveChangesAsync(cancellationToken);
                 }
                 catch (DbUpdateException ex) when (DatabaseExceptionHelper.IsDuplicateKeyException(ex))
                 {
