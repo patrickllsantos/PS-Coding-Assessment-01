@@ -2,9 +2,9 @@
 
 namespace CodingAssessment.Features.OrderDetails.Import;
 
-public class ImportDataValidation : AbstractValidator<Models.OrderDetails>
+public class ImportOrderDetailsDataValidation : AbstractValidator<Models.OrderDetails>
 {
-    public ImportDataValidation()
+    public ImportOrderDetailsDataValidation()
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id is required.");
