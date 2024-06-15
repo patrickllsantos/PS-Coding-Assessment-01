@@ -1,5 +1,5 @@
-﻿using CodingAssessment.Features.Orders.GetAll;
-using CodingAssessment.Features.Orders.Import;
+﻿using CodingAssessment.Features.Orders.GetOrders;
+using CodingAssessment.Features.Orders.ImportOrders;
 using CodingAssessment.Models.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,15 +21,15 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] PaginationParams paginationParams,
         CancellationToken cancellationToken)
     {
-        var query = new GetAllQuery(new GetAllRequest(paginationParams));
+        var query = new GetOrdersQuery(new GetOrdersRequest(paginationParams));
         var result = await _mediator.Send(query, cancellationToken);
         return Ok(result);
     }
 
     [HttpPost("import")]
-    public async Task<IActionResult> Import(ImportRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Import(ImportOrdersRequest ordersRequest, CancellationToken cancellationToken)
     {
-        await _mediator.Send(new ImportCommand(request), cancellationToken);
+        await _mediator.Send(new ImportOrdersCommand(ordersRequest), cancellationToken);
         return NoContent();
     }
 }
