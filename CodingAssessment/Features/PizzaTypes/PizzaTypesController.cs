@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using CodingAssessment.Features.PizzaTypes.Import;
+using CodingAssessment.Models.Pagination;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodingAssessment.Features.PizzaTypes;
@@ -13,12 +15,11 @@ public class PizzaTypesController : ControllerBase
     {
         _mediator = mediator;
     }
-
+    
     [HttpPost("import")]
-    public async Task<IActionResult> Import(ImportPizzaTypes.Request request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Import(ImportRequest request, CancellationToken cancellationToken)
     {
-        var command = new ImportPizzaTypes.Command(request);
-        await _mediator.Send(command, cancellationToken);
+        await _mediator.Send(new ImportCommand(request), cancellationToken);
         return Ok();
     }
 }
