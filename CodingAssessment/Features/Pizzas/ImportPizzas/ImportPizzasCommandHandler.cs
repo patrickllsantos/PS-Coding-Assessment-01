@@ -15,9 +15,9 @@ namespace CodingAssessment.Features.Pizzas.Import;
 /// <summary>
 /// Contains the handler for processing the import command.
 /// </summary>
-public static class ImportCommandHandler
+public static class ImportPizzasCommandHandler
 {
-    internal sealed class Handler : IRequestHandler<ImportCommand, Unit>
+    internal sealed class Handler : IRequestHandler<ImportPizzasCommand, Unit>
     {
         private readonly DatabaseContext _context;
         
@@ -26,10 +26,10 @@ public static class ImportCommandHandler
             _context = context;
         }
         
-        public async Task<Unit> Handle(ImportCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ImportPizzasCommand request, CancellationToken cancellationToken)
         {
-            var fileValidation = await new ImportFileValidation()
-                .ValidateAsync(request.Request, cancellationToken);
+            var fileValidation = await new ImportPizzasFileValidation()
+                .ValidateAsync(request.PizzasRequest, cancellationToken);
 
             if (!fileValidation.IsValid)
             {
@@ -41,7 +41,7 @@ public static class ImportCommandHandler
 
             try
             {
-                using var reader = new StreamReader(request.Request.File.OpenReadStream());
+                using var reader = new StreamReader(request.PizzasRequest.File.OpenReadStream());
                 using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     HeaderValidated = null,
@@ -58,7 +58,7 @@ public static class ImportCommandHandler
                 
                 await foreach (var pizza in csv.GetRecordsAsync<Pizza>(cancellationToken))
                 {
-                    var dataValidation = await new ImportDataValidation()
+                    var dataValidation = await new ImportPizzasDataValidation()
                         .ValidateAsync(pizza, cancellationToken);
 
                     if (!dataValidation.IsValid)

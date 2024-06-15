@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace CodingAssessment.Features.Pizzas.Import;
 
-public class ImportDataValidation : AbstractValidator<Pizza>
+public class ImportPizzasDataValidation : AbstractValidator<Pizza>
 {
-    public ImportDataValidation()
+    public ImportPizzasDataValidation()
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id is required.");
