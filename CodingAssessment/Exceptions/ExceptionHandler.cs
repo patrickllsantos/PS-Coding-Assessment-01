@@ -46,16 +46,28 @@ public class ExceptionHandler : IExceptionHandler
                 problemDetails.Extensions["errors"] = validationException.Errors;
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 break;
-            case DuplicateKeyException:
-                problemDetails.Title = "Duplicate key error.";
-                problemDetails.Status = StatusCodes.Status409Conflict;
-                httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
-                break;
             case CsvProcessingException when exception.InnerException is CategoryNotFoundException categoryNotFoundException:
                 problemDetails.Title = "Category not found.";
                 problemDetails.Detail = categoryNotFoundException.Message;
                 problemDetails.Status = StatusCodes.Status400BadRequest;
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                break;
+            case CsvProcessingException when exception.InnerException is PizzaTypeNotFoundException pizzaTypeNotFoundException:
+                problemDetails.Title = "Pizza type not found.";
+                problemDetails.Detail = pizzaTypeNotFoundException.Message;
+                problemDetails.Status = StatusCodes.Status400BadRequest;
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                break;
+            case CsvProcessingException when exception.InnerException is InvalidSizeException invalidSizeException:
+                problemDetails.Title = "Invalid size.";
+                problemDetails.Detail = invalidSizeException.Message;
+                problemDetails.Status = StatusCodes.Status400BadRequest;
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                break;
+            case DuplicateKeyException:
+                problemDetails.Title = "Duplicate key error.";
+                problemDetails.Status = StatusCodes.Status409Conflict;
+                httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
                 break;
             case CsvProcessingException:
                 problemDetails.Title = "An error occurred while importing the data";
