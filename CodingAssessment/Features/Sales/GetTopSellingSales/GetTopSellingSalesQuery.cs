@@ -2,4 +2,4 @@
 
 namespace CodingAssessment.Features.Sales.GetTopSellingSales;
 
-public record GetTopSellingSalesQuery(int topCount) : IRequest<GetTopSellingSalesResponse>;
+public record GetTopSellingSalesQuery(int TopCount) : IRequest<GetTopSellingSalesResponse>;

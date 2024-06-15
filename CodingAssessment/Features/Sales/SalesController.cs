@@ -1,4 +1,5 @@
-﻿using CodingAssessment.Features.Sales.GetTopSellingSales;
+﻿using CodingAssessment.Features.Sales.GetSalesByMonthReport;
+using CodingAssessment.Features.Sales.GetTopSellingSales;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,18 @@ public class SalesController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("top/{topCount}")]
+    [HttpGet("top-sellers/{topCount}")]
     public async Task<IActionResult> GetTopSellers(int topCount, CancellationToken cancellationToken)
     {
         var query = new GetTopSellingSalesQuery(topCount);
+        var result = await _mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
+    
+    [HttpGet("by-month/{year}")]
+    public async Task<IActionResult> GetSalesByMonth(int year, CancellationToken cancellationToken)
+    {
+        var query = new GetSalesByMonthReportQuery(year);
         var result = await _mediator.Send(query, cancellationToken);
         return Ok(result);
     }

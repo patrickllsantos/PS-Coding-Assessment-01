@@ -27,7 +27,7 @@ public static class GetTopSellingSalesQueryHandler
                     TotalQuantitySold = x.Sum(od => od.Quantity)
                 })
                 .OrderByDescending(x => x.TotalQuantitySold)
-                .Take(request.topCount > 100 ? 100 : request.topCount)
+                .Take(request.TopCount > 100 ? 100 : request.TopCount)
                 .ToListAsync(cancellationToken);
 
             var response = new GetTopSellingSalesResponse(topSellers);
