@@ -21,7 +21,7 @@ public class OrderDetailsController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] PaginationParams paginationParams,
         CancellationToken cancellationToken)
     {
-        var query = new GetAllQuery(new GetAllRequest(paginationParams));
+        var query = new GetOrderDetailsQuery(new GetOrderDetailsRequest(paginationParams));
         var result = await _mediator.Send(query, cancellationToken);
         return Ok(result);
     }

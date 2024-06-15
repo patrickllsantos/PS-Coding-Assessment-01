@@ -2,7 +2,7 @@
 
 namespace CodingAssessment.Features.OrderDetails.GetAll;
 
-public record GetAllResponse(
+public record GetOrderDetailsResponse(
     List<OrderDetailsResponse> Orders, 
     Pagination Pagination
 );
