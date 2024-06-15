@@ -1,0 +1,9 @@
+﻿services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pizza
+    ports:
+      - "5432:5432"
