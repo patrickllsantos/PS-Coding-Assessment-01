@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using CodingAssessment.Database;
 using CodingAssessment.Exceptions;
-using CodingAssessment.Mapping.CsvMapping;
+using CodingAssessment.Mapping;
 using CodingAssessment.Models;
 using CodingAssessment.Utilities;
 using CsvHelper;
@@ -53,9 +53,9 @@ public static class ImportPizzasCommandHandler
                     .ToListAsync(cancellationToken);
 
                 csv.Context.RegisterClassMap(new PizzaMap(pizzaTypes));
-                
+
                 var pizzas = new List<Pizza>();
-                
+
                 await foreach (var pizza in csv.GetRecordsAsync<Pizza>(cancellationToken))
                 {
                     var dataValidation = await new ImportPizzasDataValidation()
@@ -65,37 +65,33 @@ public static class ImportPizzasCommandHandler
                     {
                         var errorMessages = dataValidation.Errors
                             .Select(e => e.ErrorMessage);
-                
+
                         throw new ValidationException(errorMessages);
                     }
-                    
+
                     pizzas.Add(pizza);
                 }
 
-                try
-                {
-                    _context.Pizzas.AddRange(pizzas);
-                    await _context.SaveChangesAsync(cancellationToken);
-
-                }
-                catch (DbUpdateException ex) when (DatabaseExceptionHelper.IsDuplicateKeyException(ex))
-                {
-                    throw new DuplicateKeyException(ErrorMessages.DuplicatePizzaTypeError, ex);
-                }
+                _context.Pizzas.AddRange(pizzas);
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }
             catch (ReaderException ex)
             {
-                if (ex.InnerException is PizzaTypeNotFoundException pizzaTypeNotFoundException)
+                throw ex.InnerException switch
                 {
-                    throw new CsvProcessingException
-                        (pizzaTypeNotFoundException.Message, pizzaTypeNotFoundException);
-                }
-                
-                throw new CsvProcessingException
-                    (ErrorMessages.CsvProcessingError, ex);
-            }        
+                    PizzaTypeNotFoundException pizzaTypeNotFoundException => new CsvProcessingException(
+                        pizzaTypeNotFoundException.Message, pizzaTypeNotFoundException),
+                    InvalidSizeException invalidSizeException => new CsvProcessingException(
+                        invalidSizeException.Message, invalidSizeException),
+                    _ => new CsvProcessingException(ErrorMessages.CsvProcessingError, ex)
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ErrorMessages.CsvProcessingError, ex);
+            }
         }
     }
 }

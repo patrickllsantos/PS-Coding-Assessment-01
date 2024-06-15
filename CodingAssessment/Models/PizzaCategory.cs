@@ -8,7 +8,7 @@ public class PizzaCategory
     /// <summary>
     /// Gets or sets the unique identifier for the pizza category.
     /// </summary>
-    public int Id { get; }
+    public int Id { get; set; }
 
     /// <summary>
     /// Gets or sets the pizza category name

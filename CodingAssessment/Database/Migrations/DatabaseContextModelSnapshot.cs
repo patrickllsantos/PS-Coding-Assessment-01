@@ -108,6 +108,28 @@ namespace CodingAssessment.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PizzaCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Chicken"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Classic"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Supreme"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Veggie"
+                        });
                 });
 
             modelBuilder.Entity("CodingAssessment.Models.PizzaType", b =>

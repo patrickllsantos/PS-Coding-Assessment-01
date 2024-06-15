@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using CodingAssessment.Database;
 using CodingAssessment.Exceptions;
-using CodingAssessment.Mapping.CsvMapping;
+using CodingAssessment.Mapping;
 using CodingAssessment.Utilities;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -93,7 +93,6 @@ public sealed class ImportOrderDetailsCommandHandler
 
         private async Task ProcessBatchAsync(List<Models.OrderDetails> batch, CancellationToken cancellationToken)
         {
-            // contains list of order ids
             var orderIds = batch.Select(od => od.OrderId).Distinct().ToList();
 
             var existingOrderIds = await _context.Orders
