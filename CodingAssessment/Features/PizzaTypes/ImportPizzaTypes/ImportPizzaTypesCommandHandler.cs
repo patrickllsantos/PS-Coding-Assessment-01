@@ -56,7 +56,6 @@ public static class ImportPizzaTypesCommandHandler
                 csv.Context.RegisterClassMap(new PizzaTypeMap(categories));
 
                 var pizzaTypes = csv.GetRecords<PizzaType>()
-                    .Where(pt => pt.CategoryId != -1)
                     .ToList();
 
                 _context.PizzaTypes.AddRange(pizzaTypes);
