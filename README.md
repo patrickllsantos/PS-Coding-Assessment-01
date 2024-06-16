@@ -9,7 +9,7 @@
 ### 1.) Clone the Repository
 
 ```sh
-git clone https://github.com/patrickllsantos/Patrick-Santos-Ehrlich-Coding-Assessment.git
+git clone https://github.com/patrickllsantos/PS-Coding-Assessment-01.git
 cd repository-name
 ```
 
