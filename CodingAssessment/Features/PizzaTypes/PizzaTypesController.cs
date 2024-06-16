@@ -9,7 +9,7 @@ namespace CodingAssessment.Features.PizzaTypes;
 /// <summary>
 /// API controller for managing pizza types.
 /// </summary>
-[ApiController]
+[Controller]
 [Route("api/[controller]")]
 public class PizzaTypesController : ControllerBase
 {
@@ -45,9 +45,9 @@ public class PizzaTypesController : ControllerBase
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>No content result.</returns>
     [HttpPost("import")]
-    public async Task<IActionResult> Import(ImportPizzaTypesRequest pizzaTypesRequest, CancellationToken cancellationToken)
+    public async Task<IActionResult> Import([FromForm] IFormFile file, CancellationToken cancellationToken)
     {
-        await _mediator.Send(new ImportPizzaTypesCommand(pizzaTypesRequest), cancellationToken);
+        await _mediator.Send(new ImportPizzaTypesCommand(new ImportPizzaTypesRequest(file)), cancellationToken);
         return NoContent();
     }
 }

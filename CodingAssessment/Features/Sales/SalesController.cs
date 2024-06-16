@@ -8,7 +8,7 @@ namespace CodingAssessment.Features.Sales;
 /// <summary>
 /// API controller for managing sales data.
 /// </summary>
-[ApiController]
+[Controller]
 [Route("api/[controller]")]
 public class SalesController : ControllerBase
 {

@@ -9,7 +9,7 @@ namespace CodingAssessment.Features.OrderDetails;
 /// <summary>
 /// API controller for managing order details.
 /// </summary>
-[ApiController]
+[Controller]
 [Route("api/[controller]")]
 public class OrderDetailsController : ControllerBase
 {
