@@ -1,5 +1,6 @@
 using CodingAssessment.Database;
 using CodingAssessment.Exceptions;
+using CodingAssessment.Utilities;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,5 +27,19 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseExceptionHandler();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<DatabaseContext>();
+    await context.Database.MigrateAsync();
+    DbInitializer.Seed(app);
+}
+catch (Exception exception)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(exception, "An error occured during migration");
+}
 
 app.Run();
